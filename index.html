@@ -17,6 +17,7 @@
             background-size: 400% 400%;
             animation: gradient 15s ease infinite;
             color: white;
+            overflow-x: hidden;
         }
 
         @keyframes gradient {
@@ -33,9 +34,11 @@
             border-radius: 30px;
             backdrop-filter: blur(20px);
             box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-            max-width: 400px; /* Немного расширил для текста */
+            max-width: 400px;
             width: 90%;
             margin: 20px;
+            position: relative;
+            z-index: 1;
         }
 
         h1 {
@@ -106,6 +109,8 @@
         }
 
         .btn {
+            position: relative;
+            overflow: hidden;
             display: block;
             padding: 14px;
             text-decoration: none;
@@ -113,30 +118,65 @@
             font-size: 12px;
             letter-spacing: 1px;
             text-transform: uppercase;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s;
             font-weight: bold;
         }
 
-        .btn-main {
-            background: #fff;
-            color: #000;
+        /* ЭФФЕКТ БЛИКА НА КНОПКАХ */
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 20%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(30deg);
+            animation: shine 4s infinite;
         }
 
-        .btn-sub {
+        @keyframes shine {
+            0% { left: -60%; }
+            20% { left: 120%; }
+            100% { left: 120%; }
+        }
+
+        .btn-main { background: #fff; color: #000; }
+        .btn-sub { background: rgba(255, 255, 255, 0.1); color: white; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .btn:hover { transform: scale(1.02); }
+
+        /* КНОПКА МУЗЫКИ */
+        .music-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
             background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             color: white;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 10px;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
         }
+        .music-btn:hover { background: rgba(255, 255, 255, 0.2); }
 
-        .btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        #stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
         }
-
-        .btn-main:hover { background: #00d2ff; color: #fff; }
     </style>
 </head>
 <body>
+    <canvas id="stars"></canvas>
+
     <div class="container">
         <h1>VPOWEB</h1>
         <span class="status">Full-Stack Developer</span>
@@ -150,26 +190,73 @@
 
             <div class="info-item">
                 <span class="info-label">Увлечения</span>
-                <span class="info-value">Программирование, разработка сайтов и ботов. Пишу модули для юзер-ботов (Heroku/Hikka).</span>
+                <span class="info-value">Разработка сайтов и ботов. Пишу модули для юзер-ботов (Heroku/Hikka).</span>
                 <div class="tags">
-                    <span class="tag">C++</span>
-                    <span class="tag">C#</span>
-                    <span class="tag">Python</span>
-                    <span class="tag">JavaScript</span>
+                    <span class="tag">C++</span><span class="tag">C#</span><span class="tag">Python</span><span class="tag">JS</span>
                 </div>
             </div>
 
             <div class="info-item">
                 <span class="info-label">Услуги & Оплата</span>
-                <span class="info-value">Сайты, ТГ-боты, модули. Принимаю оплату ⭐️ <strong>звездами</strong>. Быстро и бюджетно.</span>
+                <span class="info-value">Сайты, ТГ-боты. Оплата ⭐️ <strong>звездами</strong>.</span>
             </div>
         </div>
 
         <div class="links-group">
             <a href="tg://resolve?domain=vpoweb" class="btn btn-main">Связаться со мной</a>
-            <a href="https://t.me/VpowebHelp" class="btn btn-sub" target="_blank">Мой Канал</a>
-            <a href="https://t.me/FeedbackVpoweb_bot" class="btn btn-sub" target="_blank">Бот для обратной связи</a>
+            <a href="https://t.me" class="btn btn-sub" target="_blank">Мой Канал</a>
+            <a href="https://t.me" class="btn btn-sub" target="_blank">Обратная связь</a>
         </div>
     </div>
+
+    <button class="music-btn" onclick="toggleMusic()" id="mBtn">🎵 MUSIC: OFF</button>
+    <audio id="audio" loop><source src="track.mp3" type="audio/mpeg"></audio>
+
+    <script>
+        // ЗВЕЗДНЫЙ ФОН
+        const canvas = document.getElementById('stars'), ctx = canvas.getContext('2d');
+        let pts = [];
+        function init() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        class P {
+            constructor() { 
+                this.x = Math.random() * canvas.width; 
+                this.y = Math.random() * canvas.height; 
+                this.s = Math.random() * 2; 
+                this.sx = Math.random() * 0.5 - 0.25; 
+                this.sy = Math.random() * 0.5 - 0.25; 
+                this.o = Math.random(); 
+            }
+            u() { 
+                this.x += this.sx; this.y += this.sy; 
+                if(this.x > canvas.width) this.x = 0; 
+                if(this.y > canvas.height) this.y = 0; 
+            }
+            d() { 
+                ctx.fillStyle = `rgba(255,255,255,${this.o})`; 
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.s, 0, Math.PI * 2); ctx.fill(); 
+            }
+        }
+        function anim() { 
+            ctx.clearRect(0, 0, canvas.width, canvas.height); 
+            pts.forEach(p => { p.u(); p.d(); }); 
+            requestAnimationFrame(anim); 
+        }
+        init(); for(let i=0; i<100; i++) pts.push(new P()); anim();
+        window.addEventListener('resize', init);
+
+        // ЛОГИКА МУЗЫКИ
+        const a = document.getElementById('audio'), b = document.getElementById('mBtn');
+        function toggleMusic() {
+            if (a.paused) {
+                a.play();
+                b.innerHTML = "⏸ MUSIC: ON";
+                b.style.background = "rgba(0, 210, 255, 0.2)";
+            } else {
+                a.pause();
+                b.innerHTML = "🎵 MUSIC: OFF";
+                b.style.background = "rgba(255, 255, 255, 0.1)";
+            }
+        }
+    </script>
 </body>
 </html>
