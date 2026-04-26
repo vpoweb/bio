@@ -122,6 +122,7 @@
             font-weight: bold;
         }
 
+        /* БЛИК НА КНОПКАХ */
         .btn::after {
             content: '';
             position: absolute;
@@ -143,6 +144,47 @@
         .btn-main { background: #fff; color: #000; }
         .btn-sub { background: rgba(255, 255, 255, 0.1); color: white; border: 1px solid rgba(255, 255, 255, 0.1); }
         .btn:hover { transform: scale(1.02); }
+
+        /* КНОПКА МУЗЫКИ СНИЗУ СЛЕВА */
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px 15px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .music-player:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .music-icon {
+            font-size: 18px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .music-text {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
 
         #stars {
             position: fixed;
@@ -190,7 +232,18 @@
         </div>
     </div>
 
+    <!-- МУЗЫКАЛЬНЫЙ ПЛЕЕР -->
+    <div class="music-player" onclick="toggleMusic()">
+        <span class="music-icon" id="mIcon">🎵</span>
+        <span class="music-text" id="mText">Music: OFF</span>
+    </div>
+
+    <audio id="audio" loop>
+        <source src="track.mp3" type="audio/mpeg">
+    </audio>
+
     <script>
+        // ЗВЕЗДНЫЙ ФОН
         const canvas = document.getElementById('stars'), ctx = canvas.getContext('2d');
         let pts = [];
         function init() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
@@ -220,6 +273,23 @@
         }
         init(); for(let i=0; i<100; i++) pts.push(new P()); anim();
         window.addEventListener('resize', init);
+
+        // ЛОГИКА МУЗЫКИ
+        const a = document.getElementById('audio');
+        const mIcon = document.getElementById('mIcon');
+        const mText = document.getElementById('mText');
+
+        function toggleMusic() {
+            if (a.paused) {
+                a.play();
+                mIcon.innerHTML = "⏸";
+                mText.innerHTML = "Music: ON";
+            } else {
+                a.pause();
+                mIcon.innerHTML = "🎵";
+                mText.innerHTML = "Music: OFF";
+            }
+        }
     </script>
 </body>
 </html>
