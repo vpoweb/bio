@@ -275,22 +275,28 @@
         init(); for(let i=0; i<100; i++) pts.push(new P()); anim();
         window.addEventListener('resize', init);
 
-        // ЛОГИКА МУЗЫКИ
+                // ЛОГИКА МУЗЫКИ (ОБНОВЛЕННАЯ)
         const a = document.getElementById('audio');
         const mIcon = document.getElementById('mIcon');
         const mText = document.getElementById('mText');
 
+        // Указываем прямой путь к файлу
+        a.src = "https://githubusercontent.com";
+
+
         function toggleMusic() {
             if (a.paused) {
-                a.play();
-                mIcon.innerHTML = "⏸";
-                mText.innerHTML = "Music: ON";
+                a.play().then(() => {
+                    mIcon.innerHTML = "⏸";
+                    mText.innerHTML = "Music: ON";
+                }).catch(error => {
+                    alert("Ошибка: Браузер заблокировал звук или файл не найден. Проверь наличие файла track.mp3 в репозитории.");
+                    console.error(error);
+                });
             } else {
                 a.pause();
                 mIcon.innerHTML = "🎵";
                 mText.innerHTML = "Music: OFF";
             }
         }
-    </script>
-</body>
-</html>
+
