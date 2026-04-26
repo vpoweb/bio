@@ -11,13 +11,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             font-family: 'Inter', -apple-system, sans-serif;
             background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #1a1a2e);
             background-size: 400% 400%;
             animation: gradient 15s ease infinite;
             color: white;
-            overflow: hidden;
         }
 
         @keyframes gradient {
@@ -28,56 +27,94 @@
 
         .container {
             text-align: center;
-            padding: 40px;
+            padding: 30px;
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 30px;
             backdrop-filter: blur(15px);
             box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-            max-width: 300px;
+            max-width: 320px;
             width: 90%;
+            margin: 20px;
         }
 
         h1 {
-            font-size: 28px;
+            font-size: 26px;
             letter-spacing: 2px;
-            margin-bottom: 10px;
-            background: linear-gradient(to right, #fff, #888);
+            margin-bottom: 5px;
+            background: linear-gradient(to right, #fff, #aaa);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .tg-link {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 12px 30px;
-            background: transparent;
-            color: white;
-            text-decoration: none;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            border-radius: 50px;
-            transition: 0.3s;
-            font-weight: 300;
-            text-transform: uppercase;
-            font-size: 12px;
-            letter-spacing: 1px;
+        .info-list {
+            text-align: left;
+            margin: 20px 0;
+            font-size: 14px;
+            list-style: none;
+            padding: 0;
         }
 
-        .tg-link:hover {
+        .info-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .info-item span { opacity: 0.5; }
+
+        .links-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn {
+            display: block;
+            padding: 12px;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .btn-main {
             background: white;
             color: black;
-            box-shadow: 0 0 20px rgba(255,255,255,0.4);
+            font-weight: bold;
+        }
+
+        .btn-sub {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>VPOWEB</h1>
-        <p style="opacity: 0.6; font-size: 14px;">Next Level Developer</p>
-        <a href="tg://resolve?domain=vpoweb" class="tg-link">Связаться со мной</a>
+        <p style="opacity: 0.6; font-size: 12px; margin-bottom: 20px;">Personal Profile</p>
+        
+        <div class="info-list">
+            <div class="info-item"><span>Возраст:</span> <strong>16 лет</strong></div>
+            <div class="info-item"><span>Страна:</span> <strong>Россия</strong></div>
+            <div class="info-item"><span>Номер:</span> <strong>+7 (___) ___</strong></div>
+        </div>
 
-
-
+        <div class="links-group">
+            <a href="tg://resolve?domain=vpoweb" class="btn btn-main">Связаться со мной</a>
+            <a href="https://t.me" class="btn btn-sub">Мой Канал</a>
+        </div>
     </div>
 </body>
 </html>
