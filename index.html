@@ -5,15 +5,107 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>vpoweb | BIO</title>
     <style>
-        /* ... (весь предыдущий стиль body и container остается) ... */
-        body { margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: 'Inter', sans-serif; background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #1a1a2e); background-size: 400% 400%; animation: gradient 15s ease infinite; color: white; overflow-x: hidden; }
-        @keyframes gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        .container { text-align: center; padding: 30px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 30px; backdrop-filter: blur(20px); box-shadow: 0 25px 50px rgba(0,0,0,0.5); max-width: 400px; width: 90%; position: relative; z-index: 1; }
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #1a1a2e);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            color: white;
+        }
 
-        /* ЭФФЕКТ БЛИКА НА КНОПКАХ */
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            max-width: 400px; /* Немного расширил для текста */
+            width: 90%;
+            margin: 20px;
+        }
+
+        h1 {
+            font-size: 28px;
+            letter-spacing: 3px;
+            margin: 0;
+            background: linear-gradient(to right, #fff, #8e9eab);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .status {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.5;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .info-list {
+            text-align: left;
+            margin-bottom: 25px;
+        }
+
+        .info-item {
+            margin-bottom: 12px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .info-label {
+            display: block;
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #00d2ff;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .info-value {
+            font-size: 14px;
+            line-height: 1.5;
+            display: block;
+        }
+
+        .tags {
+            margin-top: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .tag {
+            background: rgba(0, 210, 255, 0.2);
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 11px;
+            color: #00d2ff;
+        }
+
+        .links-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
         .btn {
-            position: relative;
-            overflow: hidden;
             display: block;
             padding: 14px;
             text-decoration: none;
@@ -21,107 +113,63 @@
             font-size: 12px;
             letter-spacing: 1px;
             text-transform: uppercase;
-            transition: 0.3s;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             font-weight: bold;
         }
-        
-        .btn::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -60%;
-            width: 20%;
-            height: 200%;
-            background: rgba(255, 255, 255, 0.4);
-            transform: rotate(30deg);
-            transition: none;
-            animation: shine 3s infinite;
+
+        .btn-main {
+            background: #fff;
+            color: #000;
         }
 
-        @keyframes shine {
-            0% { left: -60%; }
-            20% { left: 120%; }
-            100% { left: 120%; }
-        }
-
-        .btn-main { background: #fff; color: #000; }
-        .btn-sub { background: rgba(255, 255, 255, 0.1); color: white; border: 1px solid rgba(255, 255, 255, 0.1); }
-
-        /* КНОПКА МУЗЫКИ */
-        .music-control {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
+        .btn-sub {
             background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
             color: white;
-            padding: 10px 15px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 10px;
-            z-index: 100;
-            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Остальные стили из прошлого кода (info-item, tag и т.д.) */
-        .info-list { text-align: left; margin-bottom: 25px; }
-        .info-item { margin-bottom: 12px; padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.05); }
-        .info-label { display: block; font-size: 11px; text-transform: uppercase; color: #00d2ff; margin-bottom: 5px; font-weight: bold; }
-        .info-value { font-size: 14px; line-height: 1.5; display: block; }
-        .tags { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 5px; }
-        .tag { background: rgba(0, 210, 255, 0.2); padding: 3px 8px; border-radius: 5px; font-size: 11px; color: #00d2ff; }
+        .btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+
+        .btn-main:hover { background: #00d2ff; color: #fff; }
     </style>
 </head>
 <body>
-    <canvas id="stars" style="position:fixed; top:0; left:0; z-index:0;"></canvas>
-
     <div class="container">
         <h1>VPOWEB</h1>
-        <span style="font-size:10px; text-transform:uppercase; letter-spacing:2px; opacity:0.5; margin-bottom:20px; display:block;">Full-Stack Developer</span>
+        <span class="status">Full-Stack Developer</span>
         
         <div class="info-list">
-            <!-- Твои данные из прошлого кода -->
             <div class="info-item">
                 <span class="info-label">Личные данные</span>
                 <span class="info-value">Фролов Илья, 21 год, Россия</span>
+                <span class="info-value" style="font-size: 12px; opacity: 0.7;">+7 (937) 844 4693</span>
             </div>
+
             <div class="info-item">
                 <span class="info-label">Увлечения</span>
-                <span class="info-value">Разработка сайтов и ТГ-ботов.</span>
-                <div class="tags"><span class="tag">C++</span><span class="tag">Python</span><span class="tag">JS</span></div>
+                <span class="info-value">Программирование, разработка сайтов и ботов. Пишу модули для юзер-ботов (Heroku/Hikka).</span>
+                <div class="tags">
+                    <span class="tag">C++</span>
+                    <span class="tag">C#</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">JavaScript</span>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <span class="info-label">Услуги & Оплата</span>
+                <span class="info-value">Сайты, ТГ-боты, модули. Принимаю оплату ⭐️ <strong>звездами</strong>. Быстро и бюджетно.</span>
             </div>
         </div>
 
-        <div style="display:flex; flex-direction:column; gap:12px;">
+        <div class="links-group">
             <a href="tg://resolve?domain=vpoweb" class="btn btn-main">Связаться со мной</a>
-            <a href="https://t.me" class="btn btn-sub" target="_blank">Мой Канал</a>
+            <a href="https://t.me/VpowebHelp" class="btn btn-sub" target="_blank">Мой Канал</a>
+            <a href="https://t.me/FeedbackVpoweb_bot" class="btn btn-sub" target="_blank">Бот для обратной связи</a>
         </div>
     </div>
-
-    <button class="music-control" onclick="toggleMusic()" id="musicBtn">🎵 Music: OFF</button>
-    <audio id="myAudio" loop>
-        <source src="track.mp3" type="audio/mpeg">
-    </audio>
-
-    <script>
-        // Скрипт звезд (оставляем старый)
-        // ... (код Canvas из прошлого сообщения) ...
-
-        // ЛОГИКА МУЗЫКИ
-        const audio = document.getElementById('myAudio');
-        const btn = document.getElementById('musicBtn');
-
-        function toggleMusic() {
-            if (audio.paused) {
-                audio.play();
-                btn.innerHTML = "⏸ Music: ON";
-                btn.style.background = "rgba(0, 210, 255, 0.2)";
-            } else {
-                audio.pause();
-                btn.innerHTML = "🎵 Music: OFF";
-                btn.style.background = "rgba(255, 255, 255, 0.1)";
-            }
-        }
-    </script>
 </body>
 </html>
