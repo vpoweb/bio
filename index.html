@@ -122,7 +122,6 @@
             font-weight: bold;
         }
 
-        /* ЭФФЕКТ БЛИКА НА КНОПКАХ */
         .btn::after {
             content: '';
             position: absolute;
@@ -144,24 +143,6 @@
         .btn-main { background: #fff; color: #000; }
         .btn-sub { background: rgba(255, 255, 255, 0.1); color: white; border: 1px solid rgba(255, 255, 255, 0.1); }
         .btn:hover { transform: scale(1.02); }
-
-        /* КНОПКА МУЗЫКИ */
-        .music-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 10px 15px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 10px;
-            z-index: 100;
-            backdrop-filter: blur(10px);
-            transition: 0.3s;
-        }
-        .music-btn:hover { background: rgba(255, 255, 255, 0.2); }
 
         #stars {
             position: fixed;
@@ -209,11 +190,7 @@
         </div>
     </div>
 
-    <button class="music-btn" onclick="toggleMusic()" id="mBtn">🎵 MUSIC: OFF</button>
-    <audio id="audio" loop><source src="track.mp3" type="audio/mpeg"></audio>
-
     <script>
-        // ЗВЕЗДНЫЙ ФОН
         const canvas = document.getElementById('stars'), ctx = canvas.getContext('2d');
         let pts = [];
         function init() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
@@ -243,24 +220,6 @@
         }
         init(); for(let i=0; i<100; i++) pts.push(new P()); anim();
         window.addEventListener('resize', init);
-
-        // ЛОГИКА МУЗЫКИ
-        const a = document.getElementById('audio'), b = document.getElementById('mBtn');
-        function toggleMusic() {
-            if (a.paused) {
-                a.play();
-                b.innerHTML = "⏸ MUSIC: ON";
-                b.style.background = "rgba(0, 210, 255, 0.2)";
-            } else {
-                a.pause();
-                b.innerHTML = "🎵 MUSIC: OFF";
-                b.style.background = "rgba(255, 255, 255, 0.1)";
-            }
-        }
-<audio id="audio" loop preload="auto">
-    <source src="https://github.io" type="audio/mpeg">
-</audio>
-
     </script>
 </body>
 </html>
