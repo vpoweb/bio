@@ -1,6 +1,24 @@
-<!-- Оставьте весь верхний код со стилями <style> как есть -->
-</head>
-<body>
-    <!-- Здесь теперь пусто -->
-</body>
-</html>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* Указываем путь к вашему фото */
+        background: url('background.jpg') no-repeat center center fixed;
+        background-size: cover;
+        font-family: sans-serif;
+    }
+    /* Если захотите вернуть текст, он будет в красивой полупрозрачной рамке */
+    .card {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        padding: 30px;
+        border-radius: 20px;
+        text-align: center;
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+</style>
