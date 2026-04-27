@@ -26,7 +26,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Анимация появления карточки */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -57,13 +56,35 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .status {
+        /* Индикатор активной работы */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
             font-size: 10px;
             text-transform: uppercase;
             letter-spacing: 2px;
-            opacity: 0.5;
+            background: rgba(0, 255, 133, 0.1);
+            color: #00ff85;
+            padding: 4px 10px;
+            border-radius: 20px;
             margin-bottom: 20px;
-            display: block;
+            margin-top: 5px;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            background: #00ff85;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00ff85;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.5; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
         .info-list {
@@ -84,7 +105,7 @@
             font-size: 11px;
             text-transform: uppercase;
             color: #00d2ff;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             font-weight: bold;
         }
 
@@ -94,19 +115,20 @@
             display: block;
         }
 
-        .tags {
-            margin-top: 8px;
+        .tech-icons {
             display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
+            gap: 12px;
+            margin-top: 10px;
         }
 
-        .tag {
-            background: rgba(0, 210, 255, 0.2);
-            padding: 3px 8px;
-            border-radius: 5px;
-            font-size: 11px;
-            color: #00d2ff;
+        .tech-icons img {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .tech-icons img:hover {
+            transform: translateY(-3px) scale(1.2);
         }
 
         .links-group {
@@ -116,7 +138,10 @@
         }
 
         .btn {
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             padding: 14px;
             text-decoration: none;
             border-radius: 15px;
@@ -143,7 +168,7 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.4);
         }
 
-        .btn-main:hover { background: #00d2ff; color: #fff; }
+        .btn-main:hover { background: #00d2ff; color: #fff; box-shadow: 0 0 20px rgba(0, 210, 255, 0.4); }
         .btn-sub:hover { background: rgba(255, 255, 255, 0.2); }
 
         #stars {
@@ -162,7 +187,10 @@
 
     <div class="container">
         <h1>VPOWEB</h1>
-        <span class="status">Full-Stack Developer</span>
+        <div class="status-badge">
+            <div class="dot"></div>
+            Available for work
+        </div>
         
         <div class="info-list">
             <div class="info-item">
@@ -172,27 +200,29 @@
             </div>
 
             <div class="info-item">
-                <span class="info-label">Увлечения</span>
-                <span class="info-value">Программирование, разработка сайтов и ботов. Пишу модули для юзер-ботов (Heroku/Hikka).</span>
-                <div class="tags">
-                    <span class="tag">C++</span>
-                    <span class="tag">C#</span>
-                    <span class="tag">Python</span>
-                    <span class="tag">JavaScript</span>
+                <span class="info-label">Стек технологий</span>
+                <span class="info-value">Программирование, разработка сайтов и ботов. Пишу модули для юзер-ботов.</span>
+                <div class="tech-icons">
+                    <img src="https://jsdelivr.net" title="Python">
+                    <img src="https://jsdelivr.net" title="JavaScript">
+                    <img src="https://jsdelivr.net" title="C++">
+                    <img src="https://jsdelivr.net" title="C#">
                 </div>
             </div>
 
             <div class="info-item">
                 <span class="info-label">Услуги & Оплата</span>
-                <span class="info-value">Сайты, ТГ-боты, модули. Принимаю оплату ⭐️ <strong>звездами</strong>. Быстро и бюджетно.</span>
+                <span class="info-value">Сайты, ТГ-боты, модули. Оплата ⭐️ <strong>звездами</strong>.</span>
             </div>
         </div>
 
         <div class="links-group">
             <a href="tg://resolve?domain=vpoweb" class="btn btn-main">Связаться со мной</a>
+            <a href="https://github.com" class="btn btn-sub" target="_blank">
+                <img src="https://jsdelivr.net" width="16" style="filter: invert(1);"> GitHub
+            </a>
             <a href="https://t.me/VpowebHelp" class="btn btn-sub" target="_blank">Мой Канал</a>
             <a href="https://t.me/VpowebBot" class="btn btn-sub" target="_blank">Мой бот</a>
-            <a href="https://t.me/FeedbackVpoweb_bot" class="btn btn-sub" target="_blank">Бот для обратной связи</a>
         </div>
     </div>
 
