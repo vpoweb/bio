@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>vpoweb | BIO</title>
+    <!-- Подключаем иконки -->
+    <link rel="stylesheet" href="https://cloudflare.com">
     <style>
         body {
             margin: 0;
@@ -26,15 +28,14 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Анимация появления карточки */
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .container {
             text-align: center;
-            padding: 30px;
+            padding: 40px 30px;
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 30px;
@@ -45,25 +46,27 @@
             margin: 20px;
             position: relative;
             z-index: 1;
-            animation: fadeInUp 1s ease-out;
+            animation: fadeInUp 0.8s ease-out;
         }
 
         h1 {
-            font-size: 28px;
-            letter-spacing: 3px;
+            font-size: 32px;
+            letter-spacing: 4px;
             margin: 0;
-            background: linear-gradient(to right, #fff, #8e9eab);
+            background: linear-gradient(to right, #fff, #00d2ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            font-weight: 800;
         }
 
         .status {
             font-size: 10px;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            opacity: 0.5;
-            margin-bottom: 20px;
+            letter-spacing: 3px;
+            opacity: 0.6;
+            margin: 10px 0 25px 0;
             display: block;
+            color: #00d2ff;
         }
 
         .info-list {
@@ -75,56 +78,69 @@
             margin-bottom: 12px;
             padding: 15px;
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: 0.3s;
+        }
+
+        .info-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateX(5px);
         }
 
         .info-label {
             display: block;
-            font-size: 11px;
+            font-size: 10px;
             text-transform: uppercase;
             color: #00d2ff;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
             font-weight: bold;
+            letter-spacing: 1px;
         }
 
         .info-value {
             font-size: 14px;
-            line-height: 1.5;
+            line-height: 1.6;
             display: block;
+            opacity: 0.9;
         }
 
         .tags {
-            margin-top: 8px;
+            margin-top: 10px;
             display: flex;
             flex-wrap: wrap;
-            gap: 5px;
+            gap: 8px;
         }
 
         .tag {
-            background: rgba(0, 210, 255, 0.2);
-            padding: 3px 8px;
-            border-radius: 5px;
+            background: rgba(0, 210, 255, 0.1);
+            padding: 4px 10px;
+            border-radius: 8px;
             font-size: 11px;
             color: #00d2ff;
+            border: 1px solid rgba(0, 210, 255, 0.2);
+            font-weight: 600;
         }
 
         .links-group {
             display: flex;
             flex-direction: column;
             gap: 12px;
+            margin-bottom: 25px;
         }
 
         .btn {
             display: block;
-            padding: 14px;
+            padding: 16px;
             text-decoration: none;
-            border-radius: 15px;
+            border-radius: 16px;
             font-size: 12px;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             font-weight: bold;
+            position: relative;
+            overflow: hidden;
         }
 
         .btn-main {
@@ -133,18 +149,48 @@
         }
 
         .btn-sub {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             color: white;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            transform: translateY(-3px);
         }
 
-        .btn-main:hover { background: #00d2ff; color: #fff; }
-        .btn-sub:hover { background: rgba(255, 255, 255, 0.2); }
+        .btn-main:hover { 
+            background: #00d2ff; 
+            color: #fff;
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.5);
+        }
+
+        .btn-sub:hover { 
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Социальные иконки */
+        .social-footer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .social-link {
+            color: white;
+            font-size: 20px;
+            opacity: 0.5;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            opacity: 1;
+            color: #00d2ff;
+            transform: scale(1.2);
+        }
 
         #stars {
             position: fixed;
@@ -168,12 +214,14 @@
             <div class="info-item">
                 <span class="info-label">Личные данные</span>
                 <span class="info-value">Фролов Илья, 21 год, Россия</span>
-                <span class="info-value" style="font-size: 12px; opacity: 0.7;">+7 (937) 844 4693</span>
+                <span class="info-value" style="font-size: 12px; opacity: 0.6; margin-top: 4px;">
+                    <i class="fas fa-phone-alt" style="font-size: 10px; margin-right: 5px;"></i> +7 (937) 844 4693
+                </span>
             </div>
 
             <div class="info-item">
-                <span class="info-label">Увлечения</span>
-                <span class="info-value">Программирование, разработка сайтов и ботов. Пишу модули для юзер-ботов (Heroku/Hikka).</span>
+                <span class="info-label">Стек & Увлечения</span>
+                <span class="info-value">Разработка сайтов и ботов. Пишу модули для юзер-ботов.</span>
                 <div class="tags">
                     <span class="tag">C++</span>
                     <span class="tag">C#</span>
@@ -182,21 +230,26 @@
                 </div>
             </div>
 
-            <div class="info-item">
-                <span class="info-label">Услуги & Оплата</span>
-                <span class="info-value">Сайты, ТГ-боты, модули. Принимаю оплату ⭐️ <strong>звездами</strong>. Быстро и бюджетно.</span>
+            <div class="info-item" style="border: 1px border: 1px solid rgba(0, 210, 255, 0.2);">
+                <span class="info-label">Оплата</span>
+                <span class="info-value">Принимаю ⭐️ <strong>Telegram Stars</strong>. Быстро, качественно и бюджетно.</span>
             </div>
         </div>
 
         <div class="links-group">
-            <a href="tg://resolve?domain=vpoweb" class="btn btn-main">Связаться со мной</a>
+            <a href="tg://resolve?domain=vpoweb" class="btn btn-main">Написать в Telegram</a>
             <a href="https://t.me/VpowebHelp" class="btn btn-sub" target="_blank">Мой Канал</a>
             <a href="https://t.me/VpowebBot" class="btn btn-sub" target="_blank">Мой бот</a>
-            <a href="https://t.me/FeedbackVpoweb_bot" class="btn btn-sub" target="_blank">Бот для обратной связи</a>
+        </div>
+
+        <div class="social-footer">
+            <a href="https://github.com" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://t.me/vpoweb" class="social-link" target="_blank"><i class="fab fa-telegram"></i></a>
         </div>
     </div>
 
     <script>
+        // Твой оригинальный скрипт со звездами без изменений
         const canvas = document.getElementById('stars');
         const ctx = canvas.getContext('2d');
         let particles = [];
